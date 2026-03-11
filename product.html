@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product - Trueborn</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">TRUEBORN</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="cart.html">Cart (<span id="cartCount">0</span>)</a>
+    </nav>
+</header>
+
+<section class="product-page">
+
+    <div class="product-image">
+        <img id="productImg">
+    </div>
+
+    <div class="product-info">
+        <h2 id="productName"></h2>
+        <p class="price">$<span id="productPrice"></span></p>
+
+        <label>Size</label>
+        <select id="size">
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+            <option>X-Large</option>
+        </select>
+
+        <label>Color</label>
+        <select id="color">
+            <option>Red</option>
+            <option>White</option>
+            <option>Blue</option>
+            <option>Black</option>
+        </select>
+
+        <button class="btn" onclick="addToCart()">Add to Cart</button>
+    </div>
+
+</section>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+document.getElementById('cartCount').innerText = cart.length;
+
+let product = JSON.parse(localStorage.getItem('selectedProduct'));
+
+if (!product) {
+    window.location.href = "index.html";
+} else {
+    document.getElementById('productImg').src = product.img;
+    document.getElementById('productName').innerText = product.name;
+    document.getElementById('productPrice').innerText = product.price;
+}
+
+function addToCart() {
+    let size = document.getElementById('size').value;
+    let color = document.getElementById('color').value;
+
+    cart.push({ ...product, size, color });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cartCount').innerText = cart.length;
+
+    alert("Added to cart");
+}
+</script>
+
+</body>
+</html>

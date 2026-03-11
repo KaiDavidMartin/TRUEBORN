@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trueborn</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+<div class="logo">TRUEBORN</div>
+<nav>
+<a href="cart.html">Cart (<span id="cartCount">0</span>)</a>
+</nav>
+</header>
+
+<section class="top-section">
+<div class="hero">
+<h1>Land of the Free</h1>
+<p>Modern American Apparel</p>
+</div>
+
+<aside class="about">
+<h2>About Trueborn</h2>
+<p>
+Founded in 2026, Trueborn is a proudly American brand. All our apparel is made in the USA with the highest quality materials.
+10% of all revenue goes directly to support the U.S. Military and first responders.
+Our mission is to celebrate freedom, honor service, and create premium clothing that represents our nation.
+</p>
+</aside>
+</section>
+
+<section class="product-grid">
+
+<!-- HOODIES -->
+
+<div class="product-card" onclick="openProduct('America First Hoodie','Images/America First Hoodie.png',50)">
+<img loading="lazy" src="Images/America First Hoodie.png">
+<h3>America First Hoodie</h3>
+<p>$50</p>
+</div>
+
+<div class="product-card" onclick="openProduct('FN Scar Hoodie','Images/FN Scar Hoodie.png',55)">
+<img loading="lazy" src="Images/FN Scar Hoodie.png">
+<h3>FN Scar Hoodie</h3>
+<p>$55</p>
+</div>
+
+<div class="product-card" onclick="openProduct('God Bless America Hoodie','Images/God Bless America tee.png',60)">
+<img loading="lazy" src="Images/God Bless America tee.png">
+<h3>God Bless America Hoodie</h3>
+<p>$60</p>
+</div>
+
+<div class="product-card" onclick="openProduct('Old Flag Hoodie','Images/Old Flag Hoodie.png',65)">
+<img loading="lazy" src="Images/Old Flag Hoodie.png">
+<h3>Old Flag Hoodie</h3>
+<p>$65</p>
+</div>
+
+<div class="product-card" onclick="openProduct('Gulf of America Hoodie','Images/Gulf of America Hoodie.png',70)">
+<img loading="lazy" src="Images/Gulf of America Hoodie.png">
+<h3>Gulf of America Hoodie</h3>
+<p>$70</p>
+</div>
+
+<!-- TEES -->
+
+<div class="product-card" onclick="openProduct('Eagle Tee','Images/Eagle tee.png',30)">
+<img loading="lazy" src="Images/Eagle tee.png">
+<h3>Eagle Tee</h3>
+<p>$30</p>
+</div>
+
+<div class="product-card" onclick="openProduct('Flag and Cross Tee','Images/Flag and cross Tee.png',28)">
+<img loading="lazy" src="Images/Flag and cross Tee.png">
+<h3>Flag and Cross Tee</h3>
+<p>$28</p>
+</div>
+
+<div class="product-card" onclick="openProduct('Ill Help You Pack Tee','Images/Ill help you pack tee.png',32)">
+<img loading="lazy" src="Images/Ill help you pack tee.png">
+<h3>I'll Help You Pack Tee</h3>
+<p>$32</p>
+</div>
+
+<div class="product-card" onclick="openProduct('Love It or Leave It Tee','Images/Love it or leave it tee.png',35)">
+<img loading="lazy" src="Images/Love it or leave it tee.png">
+<h3>Love It or Leave It Tee</h3>
+<p>$35</p>
+</div>
+
+<div class="product-card" onclick="openProduct('America the Beautiful Tee','Images/America the Beautiful tee.png',36)">
+<img loading="lazy" src="Images/America the Beautiful tee.png">
+<h3>America the Beautiful Tee</h3>
+<p>$36</p>
+</div>
+
+<!-- HATS -->
+
+<div class="product-card" onclick="openProduct('M16 Hat','Images/M16 hat.png',25)">
+<img loading="lazy" src="Images/M16 hat.png">
+<h3>M16 Hat</h3>
+<p>$25</p>
+</div>
+
+<div class="product-card" onclick="openProduct('Old Flag Hat','Images/Old Flag hat .png',27)">
+<img loading="lazy" src="Images/Old Flag hat .png">
+<h3>Old Flag Hat</h3>
+<p>$27</p>
+</div>
+
+<div class="product-card" onclick="openProduct('250 Years Hat','Images/250 years hat.png',24)">
+<img loading="lazy" src="Images/250 years hat.png">
+<h3>250 Years Hat</h3>
+<p>$24</p>
+</div>
+
+<div class="product-card" onclick="openProduct('America First Hat','Images/America First Hat.png',30)">
+<img loading="lazy" src="Images/America First Hat.png">
+<h3>America First Hat</h3>
+<p>$30</p>
+</div>
+
+</section>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+document.getElementById('cartCount').innerText = cart.length;
+
+function openProduct(name, img, price){
+const product = {name,img,price};
+localStorage.setItem("selectedProduct",JSON.stringify(product));
+window.location.href="product.html";
+}
+
+</script>
+
+</body>
+</html>

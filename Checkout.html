@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Trueborn</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* Checkout form styling */
+.checkout-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+.checkout-container .row {
+    display: flex;
+    gap: 10px;
+}
+.order-summary {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+}
+.order-summary img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.cart-item-details {
+    flex-grow: 1;
+}
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 16px;
+}
+.complete-order {
+    background: #0077cc;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.complete-order:hover {
+    background: #005fa3;
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">TRUEBORN</div>
+    <nav>
+        <a href="index.html">Home</a>
+    </nav>
+</header>
+
+<div class="checkout-container" style="max-width:1200px; margin:50px auto; padding:20px; display:grid; grid-template-columns:2fr 1fr; gap:40px;">
+
+    <!-- LEFT: Shipping & Payment Form -->
+    <div class="checkout-form">
+        <h2>Shipping Information</h2>
+        <input type="text" placeholder="Full Name">
+        <input type="email" placeholder="Email">
+        <input type="text" placeholder="Address">
+        <div class="row">
+            <input type="text" placeholder="City">
+            <input type="text" placeholder="State">
+        </div>
+        <div class="row">
+            <input type="text" placeholder="ZIP">
+            <input type="text" placeholder="Country">
+        </div>
+
+        <h2 style="margin-top:30px;">Payment Details</h2>
+        <input type="text" placeholder="Card Number">
+        <div class="row">
+            <input type="text" placeholder="MM/YY">
+            <input type="text" placeholder="CVC">
+        </div>
+
+        <div style="display:flex; justify-content:center; margin-top:30px;">
+            <button class="complete-order" onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <!-- RIGHT: Order Summary -->
+    <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div id="cart-items"></div>
+        <div class="summary-total">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// Load cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+const cartItemsContainer = document.getElementById('cart-items');
+const cartTotal = document.getElementById('cart-total');
+
+function renderCart() {
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    if(cart.length === 0){
+        cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+        cartTotal.innerText = '$0.00';
+        return;
+    }
+
+    cart.forEach(item => {
+        total += item.price;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+            <img src="${item.img}" alt="${item.name}">
+            <div class="cart-item-details">
+                <p>${item.name}</p>
+                <p>Size: ${item.size} | Color: ${item.color}</p>
+                <p>$${item.price}</p>
+            </div>
+        `;
+        cartItemsContainer.appendChild(div);
+    });
+
+    cartTotal.innerText = '$' + total.toFixed(2);
+}
+
+// Place Order button
+function placeOrder(){
+    if(cart.length === 0){
+        alert('Your cart is empty.');
+        return;
+    }
+    alert('Thank you for your order!');
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+    // Redirect to main page
+    window.location.href = "index.html";
+}
+
+// Initial render
+renderCart();
+</script>
+
+</body>
+</html>
